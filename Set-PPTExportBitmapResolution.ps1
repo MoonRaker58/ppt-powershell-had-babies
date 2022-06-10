@@ -14,7 +14,6 @@
 .PARAMETER ResetToDefault
     Switch to reset the dpi to default.
 .OUTPUTS
-    Nothing if resetting to default.
     System.Management.Automation.PSCustomObject representing the RegistryEntry.
 .EXAMPLE
     Set-PPTExportBitmapResolution
