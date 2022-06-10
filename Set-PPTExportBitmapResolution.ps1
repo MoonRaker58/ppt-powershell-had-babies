@@ -49,12 +49,17 @@
 #>
 function Set-PPTExportBitmapResolution {
     [CmdletBinding()]
+    [Alias('pptres')]
     [OutputType([string])]
     param(
         [ValidateSet(50, 96, 100, 150, 200, 250, 300)]
+        [Alias('dpi','d')]
         [ArgumentCompletions(50, 96, 100, 150, 200, 250, 300)]
+        [Parameter(ParameterSetName = "SetValue")]
         [int]
         $NewDpi,
+        [Parameter(ParameterSetName = "Reset")]
+        [Alias('reset','r')]
         [switch]
         $ResetToDefault
     )
@@ -69,13 +74,13 @@ function Set-PPTExportBitmapResolution {
 
         # if (($null -eq $NewDpi) -or ($NewDpi -eq 96) -or ($NewDpi -notin 50, 96, 100, 150, 200, 250, 300)) {
         if (($null -eq $NewDpi) -or ($NewDpi -eq 96) -or ($NewDpi -eq 0)) {
-            $NewDpi = 96
             $ResetToDefault = $true
         }
     }
 
     process {
         if ($ResetToDefault) {
+            $NewDpi = 96
             # Clear out any entry, ignore if entry doesn't exist
             Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Office\$OfficeVersion\PowerPoint\Options\" -Name ExportBitmapResolution -ErrorAction SilentlyContinue
             [PSCustomObject]@{
