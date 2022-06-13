@@ -21,8 +21,15 @@
     Returns nothing because this removes the Registry Entry.
 .EXAMPLE
     Set-PPTExportBitmapResolution -ResetToDefault
-    -ResetToDefault parameter will set the dpi to the default.
-    Returns nothing because this removes the Registry Entry.
+    -ResetToDefault parameter will set the dpi to the default by removing the Registry Setting and Outputs:
+
+    ExportBitmapResolution : 96
+    PSPath                 :
+    PSParentPath           :
+    PSChildName            :
+    PSDrive                :
+    PSProvider             :
+
 .EXAMPLE
     Set-PPTExportBitmapResolution -NewDpi 100
     NewDpi parameter will set the dpi to 100 and outputs:
@@ -33,6 +40,7 @@
     PSChildName            : Options
     PSDrive                : HKCU
     PSProvider             : Microsoft.PowerShell.Core\Registry
+
 .EXAMPLE
     Set-PPTExportBitmapResolution 100
     This will set the dpi to 100 and outputs:
@@ -43,6 +51,26 @@
     PSChildName            : Options
     PSDrive                : HKCU
     PSProvider             : Microsoft.PowerShell.Core\Registry
+.EXAMPLE
+    pptres -d 100
+    Alias Example. -d parameter will set the dpi to 100 and outputs:
+
+    ExportBitmapResolution : 100
+    PSPath                 : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Office\16.0\PowerPoint\Options\
+    PSParentPath           : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Office\16.0\PowerPoint
+    PSChildName            : Options
+    PSDrive                : HKCU
+    PSProvider             : Microsoft.PowerShell.Core\Registry
+.EXAMPLE
+    pptres -r
+    Alias Example. -r parameter will set the dpi to the default by removing the Registry Setting and Outputs:
+
+    ExportBitmapResolution : 96
+    PSPath                 :
+    PSParentPath           :
+    PSChildName            :
+    PSDrive                :
+    PSProvider             :
 .LINK
     Background: https://docs.microsoft.com/en-us/office/troubleshoot/powerpoint/change-export-slide-resolution
 #>
@@ -52,13 +80,12 @@ function Set-PPTExportBitmapResolution {
     [OutputType([string])]
     param(
         [ValidateSet(50, 96, 100, 150, 200, 250, 300)]
-        [Alias('dpi','d')]
-        [ArgumentCompletions(50, 96, 100, 150, 200, 250, 300)]
+        [Alias('dpi', 'd')]
         [Parameter(ParameterSetName = "SetValue")]
         [int]
         $NewDpi,
         [Parameter(ParameterSetName = "Reset")]
-        [Alias('reset','r')]
+        [Alias('reset', 'r')]
         [switch]
         $ResetToDefault
     )
