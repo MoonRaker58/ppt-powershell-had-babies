@@ -81,7 +81,6 @@ function Set-PPTExportBitmapResolution {
     param(
         [ValidateSet(50, 96, 100, 150, 200, 250, 300)]
         [Alias('dpi', 'd')]
-        [ArgumentCompletions(50, 96, 100, 150, 200, 250, 300)]
         [Parameter(ParameterSetName = "SetValue")]
         [int]
         $NewDpi,

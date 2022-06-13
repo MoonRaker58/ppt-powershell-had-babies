@@ -8,17 +8,18 @@ I created a pure PowerShell way to change the dpi rather fast.
 
 There is probably a better way but this way is mine.
 
-Tested only on pwsh 7 on windows.
-
+Works on both PowerShell 7+ and Windows PowerShell
+## Syntax
 ```powershell
-SYNTAX
     Set-PPTExportBitmapResolution [-NewDpi <Int32>] [<CommonParameters>]
 
     Set-PPTExportBitmapResolution [-ResetToDefault] [<CommonParameters>]
 ```
 
+###Aliases too
+I added parameter and function alias examples. It is very incovenient as well as frustrating e to run multiple commmands to figure out what aliases may be part of a function.
+
 ```powershell
-.SYNTAX using Aliases
   pptres [[-n] <Int32>] [<CommonParameters>]
 
   pptres [-r] [<CommonParameters>]
@@ -64,4 +65,5 @@ Set-PPTExportBitmapResolution -ResetToDefault
 
 
 If you're lucky and I feel like it, I may add a pester test someday.
+
 Don't hold your breath.
